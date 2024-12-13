@@ -1,0 +1,87 @@
+@import '../global.css';
+
+/* Navigation Bar */
+.navbar {
+    background: #fff;
+    color: #000;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #000;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+    margin-right: auto;
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.navbar .nav-links li a {
+    color: #000;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.navbar .nav-links li a:hover {
+    color: #000;
+}
+
+.navbar .cta-button {
+    background: var(--button-background);
+    color: var(--button-text-color);
+    padding: 10px 25px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    transition: background 0.3s;
+    margin-left: auto;
+}
+
+.navbar .cta-button:hover {
+    background: var(--primary-color-dark);
+}
+
+/* Hamburger Menu (Mobile) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin-left: auto;
+}
+
+.menu-toggle .menu-bar {
+    width: 30px;
+    height: 3px;
+    background: var(--menu-bar-color);
+    border-radius: 2px;
+}
+
+.cta-button {
+    background: violet;
+    color: #000;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: background 0.3s, color 0.3s;
+}
