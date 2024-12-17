@@ -1,7 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 :root{
-  --primary-color: #7180B9;
-  --secondary-color: #2E1760;
-  --background-color: #DFF3E4;
-  --button-color: #3423A6;
-  --dark-color: #171738;
+  --primary-color: #f0dde0;
+  --secondary-color: #0e0e0f;
+  --third-color: #1b1b1d;
+  --background-color: #0e0e0f;
+  --dark-color: #080808;
+  --text-color: #f0f4f5;
+  --dark-text-color: #7a0014;
+  --button-color: #7a0014;
+}
+html{
+  background-color: var(--background-color);
+}
+body{
+  margin: 0;
+  padding: 0;
+  font-family: "Raleway", serif;
 }

@@ -24,8 +24,7 @@ function toggleMenu() {
                 </li>
                 <li><router-link to="/">Home</router-link></li>
             </ul>
-            <RouterLink to="/login" class="cta-button">Sign Up</RouterLink>
-            <RouterLink to="/login" class=".cta-button">Sign In</RouterLink>
+            <RouterLink to="/login" class=".cta-button">Login</RouterLink>
         </div>
     </nav>
 </template>

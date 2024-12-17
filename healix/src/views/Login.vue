@@ -1,32 +1,41 @@
-<template> 
-    <template>
-      <nav class="login">
-          <div class="container">
-              <router-link to="/" class="logo">Login</router-link>
-                  <li><a href="#Home">Healix</a></li>
-                  <li><router-link to="/login">Register</router-link></li>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="email">E-Mail</label>
-            <input class="form-input" type="email" id="email" />
-            <div class="form-error">
-              Ungültige E-Mail
+<script setup>
+function LoginRegisterToggle(){
+    console.log("test");
+}
+</script>
+<template>
+    <div class="Container">
+        <div class="Login">
+            <h1>Welcome back!</h1>
+            <form class="LoginForm">
+                <div class="Email Field">
+                    <img src="../assets/images/icons/Person-Icon.svg" alt="">
+                    <input 
+                    class="InputField" 
+                    id="email" 
+                    v-model="LoginEmail" 
+                    placeholder="Your Email"
+                    type="email" 
+                    required    >
+                </div>
+                <div class="Password Field">
+                    <img src="../assets/images/icons/Lock-Icon.svg" alt="">
+                    <input 
+                    class="InputField"
+                    id="password"
+                    v-model="LoginPassword"
+                    placeholder="Your Password"
+                    type="password"
+                    required    >
+                </div>
+                <button class="SubmitButton" type="submit">Submit</button>
+            </form>
+            <div class="RegisterBottomButton" @click="LoginRegisterToggle()">
+                <h1>Register</h1>
             </div>
-            <div class="form-group">
-            <label class="form-label" for="email">Passwort</label>
-            <input class="form-input" type="email" id="email" />
-            <div class="form-error">
-              Ungültiges Passwort
-            </div>
-  
-            <div class="form-group">
-            <button class="btn btn--primary btn--block">
-              Login
-            </button>
-          </div>
-          </div>
-  
-          </div>
-  
-      </nav>
-  </template>
+        </div>
+    </div>
+</template>
+<style>
+    @import '../assets/components/Login.css';
+</style>

@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-const HomeView = () => import(/* webpackChunkName: "Home" */ '../views/Home.vue');
-const Dashboard = () => import(/* webpackChunkName: "Dashboard" */ '../views/Dashboard.vue');
-const Login = () => import(/* webpackChunkName: "Login" */ '../views/Login.vue');
-const NewActivity = () => import(/* webpackChunkName: "NewActivity" */ '../views/NewActivity.vue');
-const NewMeal = () => import(/* webpackChunkName: "NewMeal" */ '../views/NewMeal.vue');
-const Profile = () => import(/* webpackChunkName: "Profile" */ '../views/Profile.vue');
+const HomeView = () => import(/* webpackChunkName: "CreateLink" */ '../views/Home.vue');
+const Dashboard = () => import(/* webpackChunkName: "CreateLink" */ '../views/Dashboard.vue');
+const Login = () => import(/* webpackChunkName: "CreateLink" */ '../views/Login.vue');
+const NewActivity = () => import(/* webpackChunkName: "CreateLink" */ '../views/NewActivity.vue');
+const NewMeal = () => import(/* webpackChunkName: "CreateLink" */ '../views/NewMeal.vue');
+const Profile = () => import(/* webpackChunkName: "CreateLink" */ '../views/Profile.vue');
 
 const routes = [
     {
