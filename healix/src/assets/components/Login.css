@@ -11,8 +11,9 @@
     padding: 30px;
     text-align: center;
 }
-.Login h1{
+.Login h1, .Register h1{
     color: white;
+    text-align: center;
 }
 .LoginForm{
     justify-self: center;
@@ -36,6 +37,9 @@
     color: white;
     font-size: large;
 }
+.Field h1{
+    margin: 2px;
+}
 ::placeholder{
     color: var(--text-color);
 }
@@ -54,13 +58,22 @@
     padding: 20px;
     border-radius: 0 0 16px 16px;
 }
-.RegisterBottomButton a:hover{
-    padding: 25px;
-    color: red;
+.RegisterBottomButton:hover{
+    padding: 22px;
 }
 .RegisterBottomButton h1{
     margin: 0;
     color: var(--text-color);
     text-decoration: none;
 
+}
+.Error{
+    color: red;
+}
+
+.Group h1, .LoginForm h1{
+    text-align: center;
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 150%;
 }
