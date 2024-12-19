@@ -10,7 +10,7 @@ const apiKey = import.meta.env.VITE_APP_API_KEY;
 const baseId = import.meta.env.VITE_APP_BASE_ID;
 const tableName = import.meta.env.VITE_APP_TABLE_NAME;
 
-
+const emit = defineEmits(['update-navbar-show']);
 //Login
 const router = useRouter();
 const LoginEmail = ref("");
@@ -78,7 +78,7 @@ const Login = async () => {
     if (updateResponse.status === 200) {
 
         setSessionCookie(sessionKey);
-
+        triggerNavbarShow();
         router.push("/dashboard");
     } else {
         throw new Error("Failed to update SessionKey in Airtable.");
@@ -91,7 +91,9 @@ const Login = async () => {
     ErrorMessage.value = "An error occurred. Please try again later.";
     }
 };
-
+function triggerNavbarShow() {
+        emit('update-navbar-show', true); // Emit an event with the value `true`
+        }
 const isLogin = ref(true);
 const LoginRegisterToggle = () => {
     isLogin.value = !isLogin.value;
