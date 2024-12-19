@@ -3,6 +3,12 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 
+const ShowRegistersucces = ref(false);
+
+//API
+const apiKey = import.meta.env.VITE_APP_API_KEY;
+const baseId = import.meta.env.VITE_APP_BASE_ID;
+const tableName = import.meta.env.VITE_APP_TABLE_NAME;
 
 
 //Login
@@ -10,6 +16,7 @@ const router = useRouter();
 const LoginEmail = ref("");
 const LoginPassword = ref("");
 const ErrorMessage = ref("");
+
 const generateSessionKey = () => {
     const characters =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
@@ -28,9 +35,6 @@ const setSessionCookie = (key) => {
 };
 
 const Login = async () => {
-    const apiKey = "patImOYWAwodargRv.9e1ae6a849c02ff76e09c705474804b18b40bc054f4a36c37b5770f16542148a"; 
-    const baseId = "appkLsmbizlvsZx5c"; 
-    const tableName = "tblVlzyXNO3hzLVRB"; 
     const url = `https://api.airtable.com/v0/${baseId}/${tableName}`;
     const headers = {
     Authorization: `Bearer ${apiKey}`,
@@ -93,13 +97,11 @@ const LoginRegisterToggle = () => {
     isLogin.value = !isLogin.value;
 };
 
-const apiKey = "patImOYWAwodargRv.9e1ae6a849c02ff76e09c705474804b18b40bc054f4a36c37b5770f16542148a"; // Replace with your API Key 
-    const baseId = "appkLsmbizlvsZx5c"; // Replace with your Base ID
-    const tableName = "tblVlzyXNO3hzLVRB"; // Replace with your Table Name
 const url = `https://api.airtable.com/v0/${baseId}/${tableName}`;
 const headers = {
-  Authorization: `Bearer ${apiKey}`,
+    Authorization: `Bearer ${apiKey}`,
 };
+
 //Register
     const InputGroup = ref(0)
     //Group 1
@@ -122,45 +124,76 @@ const headers = {
     const RegisterDiet = ref("");
 
     const Register = async () => {
-        const apiKey = "patImOYWAwodargRv.9e1ae6a849c02ff76e09c705474804b18b40bc054f4a36c37b5770f16542148a";
-    const baseId = "appkLsmbizlvsZx5c";
-    const tableName = "tblVlzyXNO3hzLVRB"; 
-
   const url = `https://api.airtable.com/v0/${baseId}/${tableName}`;
   const headers = {
     Authorization: `Bearer ${apiKey}`,
     "Content-Type": "application/json",
   };
 
-  const newUser = {
-    fields: {
-      "FirstName": RegisterFirtsName.value,
-      "LastName": RegisterLastName.value,
-      Email: RegisterEmail.value,
-      Password: RegisterPassword1.value,
-      Gender: RegisterGender.value,
-      "BirthDate": RegisterBirthDate.value, 
-      Goal: RegisterGoal.value,
-      Weight: parseFloat(RegisterWeight.value), 
-      Height: parseFloat(RegisterHeight.value), 
-      "HealthDisab": RegisterHealthDisab.value,
-      Medicaments: RegisterMedicaments.value,
-      Allergies: RegisterAllergies.value,
-      Diet: RegisterDiet.value,
-    },
-  };
+  // Überprüfen, ob die E-Mail bereits existiert
+  const checkEmailUrl = `${url}?filterByFormula=Email="${RegisterEmail.value}"`;
 
   try {
+    const emailCheckResponse = await axios.get(checkEmailUrl, { headers });
+    const existingRecords = emailCheckResponse.data.records;
+
+    if (existingRecords.length > 0) {
+      alert("Diese E-Mail-Adresse ist bereits registriert.");
+      return; // Registrierung abbrechen
+    }
+
+    // Wenn die E-Mail nicht existiert, neuen Benutzer erstellen
+    const newUser = {
+      fields: {
+        FirstName: RegisterFirtsName.value,
+        LastName: RegisterLastName.value,
+        Email: RegisterEmail.value,
+        Password: RegisterPassword1.value,
+        Gender: RegisterGender.value,
+        BirthDate: RegisterBirthDate.value,
+        Goal: RegisterGoal.value,
+        Weight: parseFloat(RegisterWeight.value),
+        Height: parseFloat(RegisterHeight.value),
+        HealthDisab: RegisterHealthDisab.value,
+        Medicaments: RegisterMedicaments.value,
+        Allergies: RegisterAllergies.value,
+        Diet: RegisterDiet.value,
+      },
+    };
+
     const response = await axios.post(url, newUser, { headers });
     console.log("User registered successfully:", response.data);
+    ShowRegistersucces.value = true;
+
+    // Formularfelder zurücksetzen
+    RegisterFirtsName.value = "";
+    RegisterLastName.value = "";
+    RegisterEmail.value = "";
+    RegisterPassword1.value = "";
+    RegisterGender.value = "";
+    RegisterBirthDate.value = "";
+    RegisterGoal.value = "";
+    RegisterWeight.value = "";
+    RegisterHeight.value = "";
+    RegisterHealthDisab.value = "";
+    RegisterMedicaments.value = "";
+    RegisterAllergies.value = "";
+    RegisterDiet.value = "";
+
+    await sleep(3000);
+    ShowRegistersucces.value = false;
     router.push("/login");
-  } catch (error) {
-    console.error("Error during registration:", error.response?.data || error);
-    alert(
-      error.response?.data?.error?.message || "An error occurred during registration."
-    );
-  }
+    LoginRegisterToggle();
+
+    } catch (error) {
+        console.error("Error during registration:", error.response?.data || error);
+        alert(
+            error.response?.data?.error?.message || "An error occurred during registration."
+        );
+    }
 };
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 </script>
 
@@ -203,7 +236,7 @@ const headers = {
         <!--Register-->
         <div class="Register" v-if="!isLogin">
             <h1>Register here!</h1>
-            <form class="LoginForm" @submit.prevent="Register">
+            <form class="LoginForm"  v-if="!ShowRegistersucces">
                 <div class="Group" v-if="InputGroup == 0">
                     <!--Group1-->
                     <h1>Personal Information</h1>
@@ -411,6 +444,10 @@ const headers = {
                     <p v-if="ErrorMessage" class="Error">{{ ErrorMessage }}</p>
                 </div>
             </form>
+            <div class="SuccesfulMessage" v-if="ShowRegistersucces">
+                <h1>Your registerd now</h1>
+                <h2>Sign in to get full access</h2>
+            </div>
             <div class="RegisterBottomButton" @click="LoginRegisterToggle">
                 <h1>Login</h1>
             </div>

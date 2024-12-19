@@ -1,1 +1,29 @@
 @import '../global.css';
+
+.container{
+    margin-top: 75px;
+    color: #fff;
+}
+.Navigation{
+    display: flex;
+    width: 10%;
+    background-color: #000;
+    justify-content: center;
+    flex-direction: column;
+}
+.Logo{
+    display: felx;
+    justify-self: center;
+    align-items: center;
+    flex-direction: column;
+}
+.Logo img{
+    width: 100%;
+    align-self: center;
+}
+.Logo h2{
+    text-align: center;
+    color: #fff;
+    margin: 0;
+    font-size: 3vw;
+}
