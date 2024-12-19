@@ -21,23 +21,22 @@ const generateSessionKey = () => {
 };
 
 const setSessionCookie = (key) => {
-    const expirationDays = 7; // Cookie valid for 7 days
+    const expirationDays = 7;
     const date = new Date();
     date.setTime(date.getTime() + expirationDays * 24 * 60 * 60 * 1000);
     document.cookie = `sessionKey=${key}; expires=${date.toUTCString()}; path=/`;
 };
 
 const Login = async () => {
-    const apiKey = "patImOYWAwodargRv.9e1ae6a849c02ff76e09c705474804b18b40bc054f4a36c37b5770f16542148a"; // Replace with your API Key 
-    const baseId = "appkLsmbizlvsZx5c"; // Replace with your Base ID
-    const tableName = "tblVlzyXNO3hzLVRB"; // Replace with your Table Name
+    const apiKey = "patImOYWAwodargRv.9e1ae6a849c02ff76e09c705474804b18b40bc054f4a36c37b5770f16542148a"; 
+    const baseId = "appkLsmbizlvsZx5c"; 
+    const tableName = "tblVlzyXNO3hzLVRB"; 
     const url = `https://api.airtable.com/v0/${baseId}/${tableName}`;
     const headers = {
     Authorization: `Bearer ${apiKey}`,
 };
 
     try {
-        // Fetch all user records
         const response = await axios.get(url, { headers });
         const user = response.data.records.find(
         (record) =>
@@ -46,11 +45,8 @@ const Login = async () => {
     );
 
     if (user) {
-        // User authenticated
-        alert("Login successful!");
         ErrorMessage.value = "";
 
-        // Generate and validate a session key
         let sessionKey;
         let isUnique = false;
 
@@ -64,7 +60,6 @@ const Login = async () => {
         }
     }
 
-      // Update the user's record in Airtable with the session key
     const updateUrl = `https://api.airtable.com/v0/${baseId}/${tableName}/${user.id}`;
     const updateResponse = await axios.patch(
         updateUrl,
@@ -77,10 +72,9 @@ const Login = async () => {
     );
 
     if (updateResponse.status === 200) {
-        // Set session key as a cookie
+
         setSessionCookie(sessionKey);
 
-        // Redirect the user to the dashboard
         router.push("/dashboard");
     } else {
         throw new Error("Failed to update SessionKey in Airtable.");
@@ -99,8 +93,13 @@ const LoginRegisterToggle = () => {
     isLogin.value = !isLogin.value;
 };
 
-
-
+const apiKey = "patImOYWAwodargRv.9e1ae6a849c02ff76e09c705474804b18b40bc054f4a36c37b5770f16542148a"; // Replace with your API Key 
+    const baseId = "appkLsmbizlvsZx5c"; // Replace with your Base ID
+    const tableName = "tblVlzyXNO3hzLVRB"; // Replace with your Table Name
+const url = `https://api.airtable.com/v0/${baseId}/${tableName}`;
+const headers = {
+  Authorization: `Bearer ${apiKey}`,
+};
 //Register
     const InputGroup = ref(0)
     //Group 1
@@ -111,7 +110,7 @@ const LoginRegisterToggle = () => {
     const RegisterPassword2 = ref("");
     //Group 2
     const RegisterGender = ref("");
-    const RegisterBirthDate = ref("");
+    const RegisterBirthDate = ref();
     const RegisterWeight = ref(null);
     const RegisterHeight = ref(null);
     //Group 3
@@ -121,7 +120,48 @@ const LoginRegisterToggle = () => {
     //Group 4
     const RegisterAllergies = ref("");
     const RegisterDiet = ref("");
-    const RegisterTrackNutrition = ref(false);
+
+    const Register = async () => {
+        const apiKey = "patImOYWAwodargRv.9e1ae6a849c02ff76e09c705474804b18b40bc054f4a36c37b5770f16542148a";
+    const baseId = "appkLsmbizlvsZx5c";
+    const tableName = "tblVlzyXNO3hzLVRB"; 
+
+  const url = `https://api.airtable.com/v0/${baseId}/${tableName}`;
+  const headers = {
+    Authorization: `Bearer ${apiKey}`,
+    "Content-Type": "application/json",
+  };
+
+  const newUser = {
+    fields: {
+      "FirstName": RegisterFirtsName.value,
+      "LastName": RegisterLastName.value,
+      Email: RegisterEmail.value,
+      Password: RegisterPassword1.value,
+      Gender: RegisterGender.value,
+      "BirthDate": RegisterBirthDate.value, 
+      Goal: RegisterGoal.value,
+      Weight: parseFloat(RegisterWeight.value), 
+      Height: parseFloat(RegisterHeight.value), 
+      "HealthDisab": RegisterHealthDisab.value,
+      Medicaments: RegisterMedicaments.value,
+      Allergies: RegisterAllergies.value,
+      Diet: RegisterDiet.value,
+    },
+  };
+
+  try {
+    const response = await axios.post(url, newUser, { headers });
+    console.log("User registered successfully:", response.data);
+    router.push("/login");
+  } catch (error) {
+    console.error("Error during registration:", error.response?.data || error);
+    alert(
+      error.response?.data?.error?.message || "An error occurred during registration."
+    );
+  }
+};
+
 </script>
 
 <template>
@@ -239,6 +279,7 @@ const LoginRegisterToggle = () => {
                             type="text"
                             required
                         >
+                            <option value="" disabled selected>Select your Gender</option>
                             <option value="Female">Female</option>
                             <option value="male">Male</option>
                             <option value="NAN">Divers</option>
@@ -294,21 +335,84 @@ const LoginRegisterToggle = () => {
                             type="text"
                             required
                         >
+                            <option value="" disabled selected>Choose one goal for Healix</option>
                             <option value="weight">Weight Management</option>
                             <option value="muscle">Muscle Building</option>
                             <option value="endurans">Improving Endurance and Stamina</option>
                             <option value="health">Overall Health</option>
                         </select>
                     </div>
-
-
-
-                    <button class="SubmitButton" @click="InputGroup = 2">Next</button>
+                    <div class="Field HealthDisab">
+                        <img src="../assets/images/icons/HealthDis-Icon.png" alt="Healthdisab Icon" />
+                        <select
+                            class="InputField"
+                            id="healthdisab"
+                            v-model="RegisterHealthDisab"
+                            name="healthdisab"
+                            placeholder="healthdisab"
+                            
+                            required
+                        >
+                            <option value="" disabled selected>Select your healthdisability</option>
+                            <option value="NAN">Nothing</option>
+                            <option value="cvds">Cardiovascular Diseases</option>
+                            <option value="diabetes">Diabetes Mellitus</option>
+                            <option value="copd">Respiratory Disorders</option>
+                            <option value="neurological">Neurological Disorders</option>
+                            <option value="musculo">Musculoskeletal Disorders</option>
+                            <option value="oams">oams</option>
+                        </select>
+                    </div>
+                    <div class="Field Medicaments">
+                        <img src="../assets/images/icons/Medi-Icon.png" alt="Medi Icon" />
+                        <input
+                            class="InputField"
+                            id="medi"
+                            v-model="RegisterMedicaments"
+                            placeholder="Medicaments"
+                            type="text"
+                            required
+                        />
+                    </div>
+                    <button class="SubmitButton" @click="InputGroup = 3">Next</button>
+                    <p v-if="ErrorMessage" class="Error">{{ ErrorMessage }}</p>
+                </div>
+                <div class="Goal" v-if="InputGroup == 3">
+                    <h1>Dietary Preferences</h1>
+                    <div class="Field Allergies">
+                        <img src="../assets/images/icons/Medi-Icon.png" alt="Allergies Icon" />
+                        <input
+                            class="InputField"
+                            id="allergies"
+                            v-model="RegisterAllergies"
+                            placeholder="Allergies"
+                            type="text"
+                            required
+                        />
+                    </div>
+                    <div class="Field Diet">
+                        <img src="../assets/images/icons/Diet-Icon.png" alt="DIet Icon" />
+                        <select
+                            class="InputField"
+                            id="diet"
+                            v-model="RegisterDiet"
+                            name="diet"
+                            placeholder="Diet"
+                            type="text"
+                            required
+                        >
+                            <option value="" disabled selected>Select your diet</option>
+                            <option value="weight">All</option>
+                            <option value="muscle">Vegetarian</option>
+                            <option value="endurans">Vegan</option>
+                        </select>
+                    </div>
+                    <button class="SubmitButton" @click="Register()">Submit</button>
                     <p v-if="ErrorMessage" class="Error">{{ ErrorMessage }}</p>
                 </div>
             </form>
             <div class="RegisterBottomButton" @click="LoginRegisterToggle">
-                <h1>Register</h1>
+                <h1>Login</h1>
             </div>
         </div>
     </div>
