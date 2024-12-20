@@ -96,7 +96,7 @@ function triggerNavbarShow() {
         }
 const isLogin = ref(true);
 const LoginRegisterToggle = () => {
-    isLogin.value = !isLogin.value;
+    isLogin.value = !isLogin.value; 
 };
 
 const url = `https://api.airtable.com/v0/${baseId}/${tableName}`;

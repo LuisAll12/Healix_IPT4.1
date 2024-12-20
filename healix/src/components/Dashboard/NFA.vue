@@ -1,14 +1,67 @@
 <script setup>
 import { ref } from 'vue';
-
-//Variables
+import { registerInAirtable } from '../../services/airtable.js';
+// Variables
 const Category = ref('');
 const Intensity = ref();
 const Duration = ref('0:00');
 const MuscleGroup = ref('');
 const Steps = ref('');
+const Loader = ref(false);  // Loader state
 
+function Reset() {
+    Category.value = '';
+    Intensity.value = '';
+    Duration.value = '0:00';
+    MuscleGroup.value = '';
+    Steps.value = '';
+}
+
+function getSessionKeyFromCookies() {
+    const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
+        const [key, value] = cookie.split("=");
+        acc[key] = value;
+        return acc;
+    }, {});
+    
+    return cookies['sessionKey'];  // Return the session key value
+}
+
+// Form submission handler
+function NFAFormSubmit() {
+    if (!Category.value || !Intensity.value || !Duration.value || !MuscleGroup.value) {
+        alert('Please fill in all the fields');
+        return;
+    } else {
+        SendToAirtable();
+        Reset();
+    }
+}
+
+async function SendToAirtable() {
+    const sessionKey = getSessionKeyFromCookies(); // Get session key
+    console.log('Session key:', sessionKey);
+    const formData = {
+        Category: Category.value,
+        Intensity: Intensity.value,
+        Duration: Duration.value,
+        MuscleGroup: MuscleGroup.value,
+        Steps: Steps.value,
+    };
+
+    console.log('Submitting to Airtable:', formData);
+
+    // Show the loader while data is being written
+    Loader.value = true;
+
+    // Register form data in Airtable
+    await registerInAirtable(formData, sessionKey);
+
+    // Hide the loader after data is written
+    Loader.value = false;
+}
 </script>
+
 <template>
     <div class="container">
         <div class="Left">
@@ -27,7 +80,7 @@ const Steps = ref('');
                 <img src="../../assets/images/pictures/Humaaans - Character.png" alt="">
             </div>
         </div>
-        <div class="InputForm">
+        <div class="InputForm" v-if="!Loader">
             <h1 class="title">Answer the form</h1>
             <form action="">
                 <div class="FormField">
@@ -88,10 +141,15 @@ const Steps = ref('');
                 <button class="Submit-Button" @click="NFAFormSubmit">Submit</button>
                 <button class="Submit-Button" @click="Reset">Reset</button>
             </div>
-
+        </div>
+        
+        <!-- Loader section -->
+        <div class="loader" v-if="Loader">
+            
         </div>
     </div>
 </template>
+
 <style scoped>
     @import '../../assets/components/DashboardComps/NFA.css';
 </style>

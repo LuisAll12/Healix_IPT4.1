@@ -7,7 +7,8 @@
   --dark-color: #080808;
   --text-color: #f0f4f5;
   --dark-text-color: #7a0014;
-  --button-color: #f0dde0;
+  --button-color: #ececec;
+  --button-color-hover: #dfdfdf;
 }
 html{
   background-color: var(--background-color);
@@ -23,6 +24,9 @@ body{
   border-radius: 50px;
   background-color: var(--button-color);
   border: none;
+}
+.Details-Button:hover{
+  background-color: var(--button-color-hover);
 }
 
 .SubmitButton{
@@ -45,4 +49,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.Submit-Button:hover{
+  background-color: var(--dark-color);
 }

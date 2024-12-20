@@ -1,73 +1,64 @@
-const apiKey = "patImOYWAwodargRv.44d81f923227c3b20f152376445deda8718809f33d7827db1f0c73fc2ca50e45";
-const baseId = "appkLsmbizlvsZx5c";
-const tableName = "tblVlzyXNO3hzLVRB";
+import Airtable from 'airtable';
+// Airtable configuration
+const apiKey = import.meta.env.VITE_APP_API_KEY;
+const baseId = import.meta.env.VITE_APP_BASE_ID;
+const FATable = import.meta.env.VITE_APP_TABLE_FA; // Table for form submissions
+const base = new Airtable({ apiKey }).base(baseId);
+/**
+ * @param {string} sessionKey 
+ * @returns {Promise<number|null>} 
+ */
 
-const airtableBaseURL = `https://api.airtable.com/v0/${baseId}/${tableName}`;
-
-// Funktion, um alle Datensätze abzurufen
-export const fetchRecords = async () => {
+/**
+ * @param {Object} formData  
+ * @param {string} sessionKey 
+ */
+export async function registerInAirtable(formData, sessionKey) {
   try {
-    const response = await fetch(airtableBaseURL, {
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-    });
+      const userRecordId = await getUserIdFromSessionKey(sessionKey); 
+      console.log('UserRecordId:', userRecordId);
 
-    if (!response.ok) {
-      throw new Error(`Error fetching records: ${response.statusText}`);
-    }
 
-    const data = await response.json();
-    return data.records;
+      if (!userRecordId) {
+          console.error("Error: UserRecordId not found for the provided SessionKey.");
+          return;
+      }
+
+      // Prepare data for Airtable
+      const record = {
+          Category: formData.Category,
+          Intensity: formData.Intensity,
+          Duration: formData.Duration,
+          Muscle: formData.MuscleGroup,
+          Steps: formData.Steps || null, 
+          UserData: [userRecordId],
+      };
+
+
+      await base(FATable).create([{ fields: record }]);
+      console.log('Data successfully registered in Airtable!');
   } catch (error) {
-    console.error(error);
-    throw error;
+      console.error('Error registering data in Airtable:', error);
   }
-};
+}
 
-// Funktion, um einen neuen Datensatz hinzuzufügen
-export const addRecord = async (fields) => {
+async function getUserIdFromSessionKey(sessionKey) {
   try {
-    const response = await fetch(airtableBaseURL, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ fields }),
-    });
+      const records = await base('UserData').select({
+          filterByFormula: `{SessionKey} = '${sessionKey}'`, 
+      }).firstPage();
 
-    if (!response.ok) {
-      throw new Error(`Error adding record: ${response.statusText}`);
-    }
+     
+      if (records.length > 0) {
+          return records[0].id;
+      }
 
-    const data = await response.json();
-    return data;
+      console.warn('No matching UserId found for the provided SessionKey.');
+      return null;
   } catch (error) {
-    console.error(error);
-    throw error;
+      console.error('Error fetching UserId from Airtable UserData table:', error);
+      return null;
   }
-};
+}
 
-// Funktion, um einen Datensatz zu löschen
-export const deleteRecord = async (id) => {
-  try {
-    const response = await fetch(`${airtableBaseURL}/${id}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-      },
-    });
 
-    if (!response.ok) {
-      throw new Error(`Error deleting record: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
