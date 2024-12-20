@@ -9,13 +9,13 @@ import Meals from '../components/Dashboard/Meals.vue';
 import NewMeal from '../components/Dashboard/NewMeal.vue';
 import NFA from '../components/Dashboard/NFA.vue';
 
+
+// Reactive variables
+
 //API
 const apiKey = import.meta.env.VITE_APP_API_KEY;
 const baseId = import.meta.env.VITE_APP_BASE_ID;
 const tableName = import.meta.env.VITE_APP_TABLE_NAME;
-// Reactive variables
-
-
 
 //CheckCookie
 const isSessionKeyAvailable = ref(false);
@@ -35,6 +35,7 @@ onMounted(async () => {
         console.log("Session key found in cookies, validating with the database...");
         try {
         // Validate session key with Airtable
+
         const url = `https://api.airtable.com/v0/${baseId}/${tableName}`;
         const headers = {
             Authorization: `Bearer ${apiKey}`,

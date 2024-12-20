@@ -1,0 +1,81 @@
+@import '../../global.css';
+
+.container{
+    color: #fff;
+    display: flex;
+    height: 100vh;
+    outline: green;
+}
+.NFA-Upper{
+    background-color: var(--third-color);
+    height: 50%;
+    width: 100%;
+    border-radius: 0 0 0 120px;
+    display: flex;
+    align-items: center;
+}
+.Infomation{
+    width: 40%;
+    margin-left: 70px;
+    box-sizing: border-box;
+}
+h1{
+    margin: 0;
+}
+.Details{
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+form{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.InputForm{
+    position: absolute;
+    background-color: #000;
+    left: 60%;
+    width: 30%;
+    top: 15%;
+    height: 75%;
+    height: auto;
+    border-radius: 20px;
+    padding: 2%;
+}
+.Left{
+    width: 100%;
+}
+.InputField{
+    background-color: var(--secondary-color);
+    border-style: none;
+    color: white;
+    font-size: large;
+    padding: 5px;
+    font-size: 1.7vw;
+}
+.FormField{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    outline: #f0dde0;
+    width: full;
+    padding: 10px;
+}
+.FormField label{
+    padding: 5px;
+}
+
+.title{
+    font-size: 2.5vw;
+    margin: 10px;
+    text-align: center;
+}
+.SubmitButtons{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10%;
+}
+

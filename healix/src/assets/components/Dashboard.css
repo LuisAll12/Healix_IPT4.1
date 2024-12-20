@@ -68,3 +68,6 @@ p{
 .Tools ul li p{
     text-align: center;
 }
+.DashboardContent{
+    width: 100%;
+}

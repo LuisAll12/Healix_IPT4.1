@@ -37,7 +37,7 @@ const setSessionCookie = (key) => {
 const Login = async () => {
     const url = `https://api.airtable.com/v0/${baseId}/${tableName}`;
     const headers = {
-    Authorization: `Bearer ${apiKey}`,
+    Authorization: `Bearer ${import.meta.env.VITE_APP_API_KEY}`,
 };
 
     try {
