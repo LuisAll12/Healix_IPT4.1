@@ -40,7 +40,6 @@ function NFAFormSubmit() {
 
 async function SendToAirtable() {
     const sessionKey = getSessionKeyFromCookies(); // Get session key
-    console.log('Session key:', sessionKey);
     const formData = {
         Category: Category.value,
         Intensity: Intensity.value,

@@ -14,32 +14,32 @@ const base = new Airtable({ apiKey }).base(baseId);
  * @param {string} sessionKey 
  */
 export async function registerInAirtable(formData, sessionKey) {
-  try {
-      const userRecordId = await getUserIdFromSessionKey(sessionKey); 
-      console.log('UserRecordId:', userRecordId);
+    try {
+        const userRecordId = await getUserIdFromSessionKey(sessionKey); 
+        console.log('UserRecordId:', userRecordId);
 
 
-      if (!userRecordId) {
-          console.error("Error: UserRecordId not found for the provided SessionKey.");
-          return;
-      }
+        if (!userRecordId) {
+            console.error("Error: UserRecordId not found for the provided SessionKey.");
+            return;
+        }
 
-      // Prepare data for Airtable
-      const record = {
-          Category: formData.Category,
-          Intensity: formData.Intensity,
-          Duration: formData.Duration,
-          Muscle: formData.MuscleGroup,
-          Steps: formData.Steps || null, 
-          UserData: [userRecordId],
-      };
+        // Prepare data for Airtable
+        const record = {
+            Category: formData.Category,
+            Intensity: formData.Intensity,
+            Duration: formData.Duration,
+            Muscle: formData.MuscleGroup,
+            Steps: formData.Steps || null, 
+            UserData: [userRecordId],
+        };
 
 
-      await base(FATable).create([{ fields: record }]);
-      console.log('Data successfully registered in Airtable!');
-  } catch (error) {
-      console.error('Error registering data in Airtable:', error);
-  }
+        await base(FATable).create([{ fields: record }]);
+        console.log('Data successfully registered in Airtable!');
+    } catch (error) {
+        console.error('Error registering data in Airtable:', error);
+    }
 }
 
 async function getUserIdFromSessionKey(sessionKey) {
@@ -60,5 +60,8 @@ async function getUserIdFromSessionKey(sessionKey) {
       return null;
   }
 }
+
+
+
 
 
