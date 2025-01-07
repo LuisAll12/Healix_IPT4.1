@@ -1,55 +1,63 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 :root{
-  --primary-color: #f0dde0;
-  --secondary-color: #0e0e0f;
-  --third-color: #1b1b1d;
-  --background-color: #0e0e0f;
-  --dark-color: #080808;
-  --text-color: #f0f4f5;
-  --dark-text-color: #7a0014;
-  --button-color: #ececec;
-  --button-color-hover: #dfdfdf;
+  --primary:#6c35de;
+  --secondary:#a364ff;
+  --text:#ffffff;
+  --accent:#cb80ff;
+  --bg:#241b35;
+  --second-bg: #191427;
+  --defaultColor:#ffc7ff;;
 }
-html{
-  background-color: var(--background-color);
-}
-body{
-  margin: 0;
-  padding: 0;
-  font-family: "Raleway", serif;
+body {
+   background-color: var(--bg); 
+   font-family: "Poppins", serif;
+   margin: 0;
+   padding: 0;
+  }
+
+
+h1,h2,h3,h4,h5,h6 { color: var(--text); }
+
+p { color: var(--text); }
+
+span { color: var(--accent); }
+
+button {
+  background-color: var(--primary);
+  color: var(--text);
 }
 
 .Details-Button{
   padding: 15px 30px;
   border-radius: 50px;
-  background-color: var(--button-color);
+  background-color: var(--primary);
   border: none;
 }
 .Details-Button:hover{
-  background-color: var(--button-color-hover);
+  background-color: var(--accent);
 }
 
 .SubmitButton{
   width: 100%;
   height: 30px;
-  background-color: var(--secondary-color);
+  background-color: var(--secondary);
   border-style: none;
   border-radius: 7px;
-  color: var(--text-color);
+  color: var(--text);
   font-size: large;
 }
 .Submit-Button{
   width: 40%;
   height: 30px;
-  background-color: var(--secondary-color);
+  background-color: var(--secondary);
   border-style: none;
-  border-radius: 7px;
-  color: var(--text-color);
+  border-radius: 30px;
+  color: var(--text);
   font-size: large;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .Submit-Button:hover{
-  background-color: var(--dark-color);
+  background-color: var(--accent);
 }

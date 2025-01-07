@@ -1,16 +1,19 @@
 @import '../global.css';
 
+html, body{
+    height: 100%;
+}
 .container{
-    color: #fff;
+    color: var(--text);
     display: flex;
+    min-height: 100%;
 }
 .Navigation{
-    width: 14%;
-    background-color: #000;
-    height: 100vh;
+    width: 15%;
+    background-color: var(--primary);
 }
 .Logo{
-    display: felx;
+    display: flex;
     justify-self: center;
     flex-direction: column;
     padding-top: 5%;
@@ -21,7 +24,7 @@
 }
 .Logo h2{
     text-align: center;
-    color: #fff;
+    color: var(--text);
     margin: 0;
     font-size: 2.5vw;
 }
@@ -37,6 +40,7 @@
 
 div ul li{
     list-style: none;
+    border-radius: 50px;
 }
 div ul li:hover{
     cursor: pointer;
@@ -62,7 +66,7 @@ p{
     height: 15%;   
 }
 .SelectedNavItem{
-    background-color: #131313;
+    background-color: var(--secondary);
     
 }
 .Tools ul li p{
