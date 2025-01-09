@@ -165,8 +165,7 @@ onMounted(async () => {
     <div class="container">
         <div class="UpperPart" v-if="userData">
             <div class="Greet">
-                <h1>Welcome to your Dashboard:</h1>
-                <h1 class="FullName">{{ userData.FirstName }} {{ userData.LastName }}</h1>
+                <h1>Welcome {{ userData.FirstName }} {{ userData.LastName }}</h1>
             </div>
             <div class="Cards">
                 <div class="card age">
