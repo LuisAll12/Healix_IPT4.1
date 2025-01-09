@@ -18,7 +18,7 @@ pages:
 pages:
     stage: deploy
     script:
-        - mv dist public
+        - mv dist publi
     artifacts:
         paths:
             - public
