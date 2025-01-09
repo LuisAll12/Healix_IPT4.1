@@ -2,8 +2,7 @@
 
 </script>
 <template>
-    <h1>Fitness</h1>
+    <div>
+        <h1>Fitness</h1>
+    </div>
 </template>
-<style scoped>
-    @import '../../assets/components/DashboardComps/Fitness.css';
-</style>
