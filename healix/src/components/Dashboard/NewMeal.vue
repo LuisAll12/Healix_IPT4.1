@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { registerMeal } from '../../services/RegisterMealAirtable.js';
+import Quotes from '../Quotes.vue';
 
 // Variables
 const MealName = ref('');
@@ -91,7 +92,7 @@ async function SendToAirtable() {
                 </div>
             </div>
             <div class="NFA-Lower">
-                <img src="../../assets/images/pictures/Humaaans - Character.png" alt="">
+                <Quotes />
             </div>
         </div>
         <div class="InputForm">

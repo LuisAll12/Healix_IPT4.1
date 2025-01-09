@@ -1,0 +1,62 @@
+@import '../../global.css';
+
+
+h1, h4{
+    margin: 0;
+}
+.container{
+    margin: 20px;
+}
+.UpperPart{
+    margin-top: 20px;
+}
+
+
+.loading {
+    position: absolute; 
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); 
+}
+
+
+.Cards{
+    display: flex;
+    flex-direction: space-between;
+    margin-top: 50px;
+    gap: 15px;
+    flex-wrap: wrap;
+
+}
+.card{
+    background-color: var(--primary);
+    width: 120px;
+    height: 100px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px;
+}
+
+.card-value{
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.card-title{
+    font-size: 15px;
+    font-style: oblique;
+}
+.card-title h4{
+    font-weight:400;
+}
+
+.Metrics{
+    display: flex;
+    flex-direction: space-around;
+    margin-top: 50px;
+    gap: 50px;
+    flex-wrap: wrap;
+}

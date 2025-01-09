@@ -18,5 +18,5 @@
 </template>
 
 <style scoped>
-
+  @import './assets/global.css';
 </style>

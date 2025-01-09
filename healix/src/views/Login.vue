@@ -160,6 +160,7 @@ const headers = {
         Medicaments: RegisterMedicaments.value,
         Allergies: RegisterAllergies.value,
         Diet: RegisterDiet.value,
+        SportClass: SportClass.value,
       },
     };
 
@@ -197,6 +198,31 @@ const headers = {
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+
+const options = [
+  {
+    value: 'A',
+    label: "High",
+    details: { steps: "120K Steps", gym: "5x Gym", exercises: "5x Exercises" },
+  },
+  {
+    value: 'B',
+    label: "Good",
+    details: { steps: "70K Steps", gym: "4x Gym", exercises: "3x Exercises" },
+  },
+  {
+    value: 'C',
+    label: "Mid",
+    details: { steps: "50K Steps", gym: "2x Gym", exercises: "3x Exercises" },
+  },
+  {
+    value: 'D',
+    label: "Low",
+    details: { steps: "30K Steps", gym: "1x Gym", exercises: "2x Exercises" },
+  },
+];
+
+const SportClass = ref('A'); // Default value
 </script>
 
 <template>
@@ -441,6 +467,31 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
                             <option value="muscle">Vegetarian</option>
                             <option value="endurans">Vegan</option>
                         </select>
+                    </div>
+                    <div class="Field Fitness">
+                        <p>Weekly Goal</p>
+                        <div class="radio-input">
+                            <label class="label" v-for="option in options" :key="option.value">
+                            <input
+                                type="radio"
+                                :id="'value-' + option.value"
+                                name="value-radio"
+                                :value="option.value"
+                                v-model="SportClass"
+                            />
+                            <span class="text">
+                                {{ option.label }}
+                                <div class="tooltip">
+                                <div class="icon">i</div>
+                                <div class="tooltiptext">
+                                    <p>{{ option.details.steps }}</p>
+                                    <p>{{ option.details.gym }}</p>
+                                    <p>{{ option.details.exercises }}</p>
+                                </div>
+                                </div>
+                            </span>
+                            </label>
+                        </div>
                     </div>
                     <button class="SubmitButton" @click="Register()">Submit</button>
                     <p v-if="ErrorMessage" class="Error">{{ ErrorMessage }}</p>

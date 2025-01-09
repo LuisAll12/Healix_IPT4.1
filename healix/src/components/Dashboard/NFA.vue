@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { registerInAirtable } from '../../services/airtable.js';
+import Quotes from '../Quotes.vue';
 // Variables
 const Category = ref('');
 const Intensity = ref();
@@ -76,7 +77,7 @@ async function SendToAirtable() {
                 </div>
             </div>
             <div class="NFA-Lower">
-                <img src="../../assets/images/pictures/Humaaans - Character.png" alt="">
+                <Quotes />
             </div>
         </div>
         <div class="InputForm" v-if="!Loader">

@@ -11,11 +11,11 @@
   "dependencies": {
     "airtable": "^0.12.2",
     "axios": "^1.7.9",
-    "chart.js": "^3.9.1",
+    "chart.js": "^4.4.7",
     "dotenv": "^16.4.7",
     "three": "^0.171.0",
     "vue": "^3.5.13",
-    "vue-chart-3": "^3.1.8",
+    "vue-chartjs": "^5.3.2",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
