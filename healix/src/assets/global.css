@@ -6,7 +6,9 @@
   --accent:#cb80ff;
   --bg:#241b35;
   --second-bg: #191427;
-  --defaultColor:#ffc7ff;;
+  --defaultColor:#ffc7ff;
+  --Home-LoginBtn-Hover-Color: #c71585;
+  --Home-LoginBtn-Color: #ee82ee;;
 }
 body {
    background-color: var(--bg); 
