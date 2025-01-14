@@ -19,6 +19,7 @@
             const randomRecord = await fetchRandomRecord();
             if (randomRecord) {
                 record.value = randomRecord;
+                console.log(record)
             } else {
                 alert('Error fetching record');
             }

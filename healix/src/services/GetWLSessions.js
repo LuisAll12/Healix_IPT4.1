@@ -7,7 +7,8 @@ const baseId = import.meta.env.VITE_APP_BASE_ID;
 const fitnessTable = "FitnessActivity"; 
 const base = new Airtable({ apiKey }).base(baseId);
 
-export async function fetchUserStepsInMonth() {
+
+export async function fetchWeightliftingEntriesCount() {
     try {
         const sessionKey = getSessionKeyFromCookies();
         if (!sessionKey) {
@@ -30,20 +31,17 @@ export async function fetchUserStepsInMonth() {
             console.log('No user found for the given session key!');
             return null;
         }
-
+        const currentDate = new Date();
         const userRecord = usersQuery[0];
         const userId = userRecord.id;
-        const userNumber   = userRecord.fields.UserId;
+        const userNumber = userRecord.fields.UserId;
         console.log(userRecord);
-        // Step 2: Generate current year and month
-        const currentDate = new Date();
         const currentYearMonth = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}`;
-        console.log("Current year-month:", currentYearMonth);
-        console.log(currentYearMonth);
-        // Step 3: Query records for the user for the current month
+        // Step 2: Query records for the user where category is "weightlifting"
         const filterFormula = `
             AND(
                 {UserData} = "${userNumber}",
+                {Category} = "weightlifting",
                 {MonthNumber} = "${currentYearMonth}"
             )
         `;
@@ -54,21 +52,13 @@ export async function fetchUserStepsInMonth() {
             })
             .all();
 
-        console.log("Fitness Query Result:", fitnessQuery);
+        console.log("Weightlifting Query Result:", fitnessQuery);
 
-        if (fitnessQuery.length === 0) {
-            console.log('No fitness activities found for this user this month.');
-            return { totalSteps: 0 };
-        }
+        // Return the count of entries
+        const entryCount = fitnessQuery.length;
 
-        // Calculate total steps
-        const totalSteps = fitnessQuery.reduce((sum, record) => {
-            const steps = parseInt(record.fields['Steps'], 10) || 0;
-            return sum + steps;
-        }, 0);
-
-        console.log(`Total steps for user this month: ${totalSteps}`);
-        return { totalSteps };
+        console.log(`Total weightlifting entries for user: ${entryCount}`);
+        return { entryCount };
 
     } catch (error) {
         console.error('Error fetching data from Airtable:', error);
