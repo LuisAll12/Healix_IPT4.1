@@ -1,1 +1,144 @@
 @import '../global.css';
+
+.navbar {
+    background: var(--primary);
+    color: white;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #000;
+    
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.navbar .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+
+    text-decoration: none;
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    justify-self: center;
+    margin: 0px;
+    padding: 0px;
+}
+.navbar .nav-links ul {
+    list-style-type: none;
+    display: flex;
+    gap: 25px;
+    padding: 0;
+    justify-content: center;
+}
+ul.nav-links {
+    margin: 0px;
+}
+.navbar .nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+    margin-right: 16px;
+}
+
+.navbar .nav-links li a:hover {
+    color: #ddd;
+}
+
+.navbar .cta-button {
+    background: var(--Home-LoginBtn-Color);
+    color: black;
+    padding: 10px 25px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    transition: background 0.3s, color 0.3s;
+    margin-right: 115px;
+
+}
+
+.navbar .cta-button:hover {
+    background: var(--Home-LoginBtn-Hover-Color);
+    color: white;
+}
+
+/* Hamburger Menu (Mobile) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.menu-toggle .menu-bar {
+    width: 30px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+}
+
+.rectangle {
+    background-color: #f5f5f5;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 120px auto; 
+    margin-top: 340px; 
+    max-width: 800px;
+    text-align: center;
+}
+.rectangle .headline {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.rectangle .subheadline {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.rectangle .hero-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .navbar .nav-links {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .rectangle {
+        padding: 20px;
+        margin-top: 100px;
+    }
+
+    .rectangle .headline {
+        font-size: 1.8rem;
+    }
+
+    .rectangle .subheadline {
+        font-size: 1rem;
+    }
+}
