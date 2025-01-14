@@ -1,6 +1,6 @@
 <template>
     <div class="Activity-container">
-        <div class="UpperDashboard" v-if="userData">
+        <div class="UpperDashboard" v-if="setProgressFinished == true">
             <div class="Graph">
                 <ActivityChart />
             </div>
@@ -28,7 +28,7 @@
                             <p>You took</p>
                         </div>
                         <div class="Value">
-                            <h1>{{ Steps }}</h1>
+                            <h1>{{ Steps?.totalSteps || 0 }}</h1>
                         </div>
                         <div class="Info_Title">
                             <p>steps this month</p>
@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="LowerDashboard" v-if="userData">
+        <div class="LowerDashboard" v-if="setProgressFinished == true">
             <div class="Activity_Widgets">
                 <div class="Cardio_Widget">
                         <div class="icon-container">
@@ -52,7 +52,7 @@
                             <div class="progress" :style="{ width: CardioProgress + '%' }"></div>
                         </div>
                         <div class="details">
-                            <span class="distance">1700 / {{ WeekGoalCardio }} Steps</span>
+                            <span class="distance">{{ Steps?.totalSteps || 0 }} / {{ WeekGoalCardio }} Steps</span>
                             <span class="time-left">{{ DaysLeft }} days left</span>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                                 <div class="progress" :style="{ width: WeightliftingProgress + '%' }"></div>
                         </div>
                         <div class="details">
-                            <span class="distance">2 / {{ WeekGoalWeightlifting }} Sessions</span>
+                            <span class="distance">{{ WLSessions?.entryCount || 0 }} / {{ WeekGoalWeightlifting }} Sessions</span>
                             <span class="time-left">{{ DaysLeft }} days left</span>
                         </div>
                     </div>
@@ -84,11 +84,11 @@
                         <div class="content">
                         <h3 class="title">Bodyweight Drill</h3>
                         <p class="subtitle">{{ WeekGoalBodyWeight }} Sessions / week</p>
-                        <div class="progress-bar">
+                        <div class="progress-bar" v-if="WeekGoalBodyWeightAchieved == false">
                             <div class="progress" :style="{ width: BodyWeightProgress + '%' }"></div>
                         </div>
                         <div class="details">
-                            <span class="distance">3 / {{ WeekGoalBodyWeight }} Sessions</span>
+                            <span class="distance">{{ BWSessions?.BWSessionsCount || 0 }} / {{ WeekGoalBodyWeight }} Sessions</span>
                             <span class="time-left">{{ DaysLeft }} days left</span>
                         </div>
                     </div>
@@ -105,13 +105,18 @@
     import ActivityChart from '../ActivityChart.vue';
     import { getLoggedInUserData } from '../../services/GetUserData.js';
     import  { fetchUserStepsInMonth }  from '../../services/StepsThisMonth.js';
+    import { fetchWeightliftingEntriesCount } from '../../services/GetWLSessions.js'
+    import { fetchBodyWeightEntriesCount } from '../../services/GetBWSessions.js'
     import { ref, onMounted, computed } from 'vue';
 
     import HampterLoader from '../HamsterLoader.vue';
     const DaysLeft = ref(null)
     const userData = ref(null);
-    const Steps = ref(3173)
-    const CardioProgress = ref(40);
+    const Steps = ref();
+    const WLSessions = ref();
+    const BWSessions = ref();
+
+    const CardioProgress = ref(0);
     const WeightliftingProgress = ref(20);
     const BodyWeightProgress = ref(23);
 
@@ -119,8 +124,12 @@
     const WeekGoalWeightlifting = ref(null);
     const WeekGoalBodyWeight = ref(null);
 
-    const today = new Date().getDay();
+    const GoalCardioAchieved = ref(false);
+    const GoalWeightliftingAchieved = ref(false);
+    const WeekGoalBodyWeightAchieved = ref(false);
 
+    const today = new Date().getDay();
+    const setProgressFinished = ref(false)
     DaysLeft.value = computed(() => {
         return 7 - today;
     });
@@ -151,14 +160,39 @@
             WeekGoalBodyWeight.value = 2;
         }
     }
-
+    
+    function setProgress(){
+        CardioProgress.value = Steps.value.totalSteps / WeekGoalCardio.value * 100
+        WeightliftingProgress.value = WLSessions.value.entryCount / WeekGoalWeightlifting.value * 100
+        BodyWeightProgress.value = BWSessions.value.BWSessionsCount / WeekGoalBodyWeight.value * 100
+        console.log(WeightliftingProgress.value)
+        if(Steps.value.totalSteps >= WeekGoalCardio.value){
+            GoalCardioAchieved.value = true;
+        }
+        if(WLSessions.value.entryCounts >=  WeekGoalWeightlifting.value){
+            GoalWeightliftingAchieved.value = true;
+        }
+        if(Steps.value.totalSteps >= WeekGoalCardio.value){
+            GoalCardioAchieved.value = true;
+        }
+        return true;
+    }
 
     onMounted(async () => {
         userData.value = await getLoggedInUserData();
         getGoalsOutOfSportClass();
+
+        // Fetch monthly steps and weightlifting sessions
         Steps.value = await fetchUserStepsInMonth();
-        Steps.value = 421773;
-        if (userData.value) {
+        console.log('Fetched Steps:', Steps.value); // Debugging log
+
+        WLSessions.value = await fetchWeightliftingEntriesCount();
+        BWSessions.value = await fetchBodyWeightEntriesCount();
+        console.log('Fetched Weightlifting Sessions:', WLSessions.value);
+
+        setProgressFinished.value = setProgress();
+        console.log(setProgressFinished.value);
+        if (userData.value && setProgressFinished.value == true) {
             console.log("Logged-in user data:", userData.value);
         } else {
             console.warn("No user data found or user is not logged in.");
