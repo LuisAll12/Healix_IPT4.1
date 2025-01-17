@@ -4,7 +4,6 @@
     color: var(--text);
     display: flex;
     height: 100vh;
-    outline: green;
 }
 .NFA-Upper{
     background-color: var(--second-bg);
@@ -117,3 +116,23 @@ form{
       80%  {text-shadow:    0  0 0 #000,10ch 0 0 #000;background-size:100% 3px}
       100% {text-shadow: -10ch 0 0 #000,0    0 0 #000}
   }
+
+
+@media only screen and (max-width: 1350px) {
+    .InputForm {
+    position: static; /* Standardwert, keine spezielle Positionierung */
+    background-color: var(--primary);
+    width: 60%; /* Oder eine feste Breite, wenn gewünscht */
+    height: auto; /* Höhe wird automatisch angepasst */
+    border-radius: 20px;
+    padding: 2%;
+    margin: 0 auto; /* Optional: Zentriert das Element, wenn es eine feste Breite hat */
+    }
+    .containernm{
+        color: var(--text);
+        display: block;
+    }
+    .Left{
+        display: none;
+    }
+}
