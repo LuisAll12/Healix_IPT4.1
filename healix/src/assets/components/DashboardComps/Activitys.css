@@ -181,7 +181,7 @@ p, h1, h3{
   height: 96px;
 }
 
-@media only screen and (max-width: 1500px) {
+@media only screen and (max-width: 1200px) {
   .Activity-container {
     display: flex;
     flex-direction: column;
@@ -192,4 +192,24 @@ p, h1, h3{
     gap: 20px; 
     position: unset; 
   }
+  .Activity_Widgets{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  .UpperDashboard {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.Graph{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 }

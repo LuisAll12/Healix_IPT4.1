@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRouter } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
 import axios from "axios";
 import Activity from '../components/Dashboard/Activity.vue';
 import Fitness from '../components/Dashboard/Fitness.vue';
@@ -70,36 +70,51 @@ const NavbarSelectedValue = ref(1);
 function NavbarToggle(ClickValue){
     NavbarSelectedValue.value = ClickValue;
 }
-const NavbarShowState = ref(false)
+const NavbarShowState = ref(true)
 function NavbarIn(){
     NavbarShowState.value = !NavbarShowState.value;
     console.log(NavbarShowState.value)
 }
 </script>
-
-<template>
-    <div class="container" :class="{Navbarinactive: !NavbarShowState }">
+<!-- <template>
+    <div class="container" :class="{Navbarinactive: !NavbarShowState}">
         <div class="NavBarContainer">
-            <div class="Navigation" v-if="NavbarShowState" >
+            <div class="Navigation" v-if="NavbarShowState">
                 <div class="Logo">
-                    <img src="../assets/images/pictures/Logo.png" alt="">
+                    <img src="../assets/images/pictures/Logo.png" alt="" />
                     <h2>HEALIX</h2>
                 </div>
-                <br>
+                <br />
                 <div class="General">
                     <p class="title">General</p>
                     <ul>
-                        <li @click="NavbarToggle(1)" class="li-item" :class="{SelectedNavItem: NavbarSelectedValue == 1}"><img src="../assets/images/icons/Main-Icon.png" alt=""><p class="NavbarItem">Main</p></li>
-                        <li @click="NavbarToggle(2)" class="li-item" :class="{SelectedNavItem: NavbarSelectedValue == 2}"><img src="../assets/images/icons/Diet-Icon.png" alt=""><p class="NavbarItem">Meals</p></li>
-                        <li @click="NavbarToggle(3)" class="li-item" :class="{SelectedNavItem: NavbarSelectedValue == 3}"><img src="../assets/images/icons/Fitness-Icon.png" alt=""><p class="NavbarItem">Fitness</p></li>
-                        <li @click="NavbarToggle(4)" class="li-item" :class="{SelectedNavItem: NavbarSelectedValue == 4}"><img src="../assets/images/icons/Activitys-Icon.png" alt=""><p class="NavbarItem">Activitys</p></li>
+                        <RouterLink to="/dashboard" class="li-item" :class="{SelectedNavItem: $route.path === '/dashboard'}">
+                            <img src="../assets/images/icons/Main-Icon.png" alt="" />
+                            <p class="NavbarItem">Main</p>
+                        </RouterLink>
+                        <RouterLink to="/dashboard/meals" class="li-item" :class="{SelectedNavItem: $route.path === '/dashboard/meals'}">
+                            <img src="../assets/images/icons/Diet-Icon.png" alt="" />
+                            <p class="NavbarItem">Meals</p>
+                        </RouterLink>
+                        <RouterLink to="/dashboard/fitness" class="li-item" :class="{SelectedNavItem: $route.path === '/dashboard/fitness'}">
+                            <img src="../assets/images/icons/Fitness-Icon.png" alt="" />
+                            <p class="NavbarItem">Fitness</p>
+                        </RouterLink>
+                        <RouterLink to="/dashboard/activity" class="li-item" :class="{SelectedNavItem: $route.path === '/dashboard/activity'}">
+                            <img src="../assets/images/icons/Activitys-Icon.png" alt="" />
+                            <p class="NavbarItem">Activities</p>
+                        </RouterLink>
                     </ul>
                 </div>
                 <div class="Tools">
                     <p class="title">Tools</p>
                     <ul>
-                        <li @click="NavbarToggle(5)" class="li-item-lower" :class="{SelectedNavItem: NavbarSelectedValue == 5}"><p class="NavbarItem">New Meal</p></li>
-                        <li @click="NavbarToggle(6)" class="li-item-lower" :class="{SelectedNavItem: NavbarSelectedValue == 6}"><p class="NavbarItem">New Fitness activity</p></li>
+                        <RouterLink to="/dashboard/new-meal" class="li-item-lower" :class="{SelectedNavItem: $route.path === '/dashboard/new-meal'}">
+                            <p class="NavbarItem">New Meal</p>
+                        </RouterLink>
+                        <RouterLink to="/dashboard/new-fitness" class="li-item-lower" :class="{SelectedNavItem: $route.path === '/dashboard/new-fitness'}">
+                            <p class="NavbarItem">New Fitness Activity</p>
+                        </RouterLink>
                     </ul>
                 </div>
             </div>
@@ -107,27 +122,63 @@ function NavbarIn(){
             <h1 class="toggle-button" @click="NavbarIn()" v-if="NavbarShowState"><</h1>
         </div>
         <div class="DashboardContent">
-            <div class="MainDashboard" v-if="NavbarSelectedValue == 1">
-                <Main />
-            </div>
-            <div class="MealsDashboard" v-if="NavbarSelectedValue == 2">
-                <Meals />
-            </div>
-            <div class="FitnessDashboard" v-if="NavbarSelectedValue == 3">
-                <Fitness />
-            </div>
-            <div class="ActivityDashboard" v-if="NavbarSelectedValue == 4">
-                <Activity />
-            </div>
-            <div class="NewMealDashboard" v-if="NavbarSelectedValue == 5">
-                <NewMeal />
-            </div>
-            <div class="NFADashboard" v-if="NavbarSelectedValue == 6">
-                <NFA />
-            </div>
+            <router-view />
         </div>
     </div>
+</template> -->
+<template>
+    <div class="container" :class="{Navbarinactive: !NavbarShowState}">
+      <div class="NavBarContainer">
+        <div class="Navigation" v-if="NavbarShowState">
+          <div class="Logo">
+            <img src="../assets/images/pictures/Logo.png" alt="" />
+            <h2>HEALIX</h2>
+          </div>
+          <br />
+          <div class="General">
+            <p class="title">General</p>
+            <ul>
+              <RouterLink to="/dashboard" class="li-item" :class="{SelectedNavItem: $route.path === '/dashboard'}">
+                <img src="../assets/images/icons/Main-Icon.png" alt="" />
+                <p class="NavbarItem">Main</p>
+              </RouterLink>
+              <RouterLink to="/dashboard/meals" class="li-item" :class="{SelectedNavItem: $route.path === '/dashboard/meals'}">
+                <img src="../assets/images/icons/Diet-Icon.png" alt="" />
+                <p class="NavbarItem">Meals</p>
+              </RouterLink>
+              <RouterLink to="/dashboard/fitness" class="li-item" :class="{SelectedNavItem: $route.path === '/dashboard/fitness'}">
+                <img src="../assets/images/icons/Fitness-Icon.png" alt="" />
+                <p class="NavbarItem">Fitness</p>
+              </RouterLink>
+              <RouterLink to="/dashboard/activity" class="li-item" :class="{SelectedNavItem: $route.path === '/dashboard/activity'}">
+                <img src="../assets/images/icons/Activitys-Icon.png" alt="" />
+                <p class="NavbarItem">Activities</p>
+              </RouterLink>
+            </ul>
+          </div>
+          <div class="Tools">
+            <p class="title">Tools</p>
+            <ul>
+              <RouterLink to="/dashboard/new-meal" class="li-item-lower" :class="{SelectedNavItem: $route.path === '/dashboard/new-meal'}">
+                <p class="NavbarItem">New Meal</p>
+              </RouterLink>
+              <RouterLink to="/dashboard/new-fitness" class="li-item-lower" :class="{SelectedNavItem: $route.path === '/dashboard/new-fitness'}">
+                <p class="NavbarItem">New Fitness Activity</p>
+              </RouterLink>
+            </ul>
+          </div>
+        </div>
+        <h1 class="toggle-button" @click="NavbarIn()" v-if="!NavbarShowState">></h1>
+        <h1 class="toggle-button" @click="NavbarIn()" v-if="NavbarShowState"><</h1>
+      </div>
+  
+      <div class="DashboardContent">
+        <!-- Der dynamische Inhalt wird hier angezeigt -->
+        <router-view />
+      </div>
+    </div>
 </template>
+
 
 <style scoped>
 @import '../assets/components/Dashboard.css';

@@ -7,7 +7,6 @@
         <option value="weekly">Weekly</option>
       </select>
     </div>
-    
     <canvas ref="chartRef"></canvas>
   </div>
 </template>
@@ -144,8 +143,8 @@ watch(timeframe, (newTimeframe) => {
 <style scoped>
 @import '../assets/global.css';
 .chart-container {
-  width: 100%;
-  max-width: 1000px;
+  /* width: 100%;
+  max-width: 1000px; */
   padding: 24px;
   border-radius: 16px;
   background-image: linear-gradient(to bottom, var(--primary), var(--bg));

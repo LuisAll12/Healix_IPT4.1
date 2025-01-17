@@ -11,6 +11,7 @@ html, body{
     grid-column-gap: 33px;
     grid-row-gap: 0px;
     min-height: 100%;
+    /* transition: 500ms ease-in; */
 }
 .NavBarContainer{
     display: flex;
@@ -18,6 +19,8 @@ html, body{
 }
 .Navigation{
     background-color: var(--primary);
+    /* transition: 500ms ease-in; */
+    min-width: 250px;
 }
 .toggle-button:hover{
     cursor: pointer;
@@ -47,12 +50,15 @@ html, body{
     font-size: 1.1vw;
     text-align: center;
 }
-
-div ul li{
+.li-item, .li-item-lower {
+    text-decoration: none; /* Entfernt den Unterstrich */
+  }
+div ul .RouterLink{
     list-style: none;
+    text-decoration: none;
     border-radius: 50px;
 }
-div ul li:hover{
+div ul .RouterLink:hover{
     cursor: pointer;
 }
 .General ul{
@@ -79,7 +85,7 @@ p{
     background-color: var(--secondary);
     
 }
-.Tools ul li p{
+.Tools ul .li-item, .li-item-lower p{
     text-align: center;
 }
 .DashboardContent{
@@ -89,9 +95,11 @@ p{
 .Navbarinactive{
     color: var(--text);
     display: grid;
-    grid-template-columns: 0.05fr 1.95fr;
+    grid-template-columns: 0.02fr 1.98fr;
     grid-template-rows: 1fr;
-    grid-column-gap: 33px;
+    grid-column-gap: 10px;
     grid-row-gap: 0px;
     min-height: 100%;
+    transition: 500ms ease ;
 }
+
