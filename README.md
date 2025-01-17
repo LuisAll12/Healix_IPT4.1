@@ -1,27 +1,33 @@
-🌟 Healix App 🌟
-Your ultimate companion for health management and fitness improvement!
+# Project Title
 
-🚀 Purpose
-    Healix is designed to simplify managing your health and maintaining your fitness level. With a dual focus on exercise 🏋️ and nutrition 🥗, our app ensures you get personalized insights to embark on your fitness journey.
+Purpose
+Healix is designed to simplify managing your health and maintaining your fitness level. With a dual focus on exercise  and nutrition, our app ensures you get personalized insights to embark on your fitness journey.
 
-💡 Why Healix?
-    📊 Personalized Algorithms: Our smart internal algorithms guide you with tailored plans.
-    🏃 Holistic Focus: Exercise and nutrition combined for a complete health solution.
-    💻 Developer Friendly: Enhance coding skills by working with Vue.js while contributing to Healix!
+## Instalation
 
-📖 Features
-    🎯 Fitness Tracking
-    Log your workouts with ease.
-    Monitor progress across multiple metrics like calories burned, duration, and distance covered.
+Install it with the Link and open the Project in the console
 
-    🥗 Nutrition Guidance
-    Access meal plans based on dietary preferences.
-    Track your calorie intake and macronutrient balance.
+### Prerequisites
 
-    🧠 Smart Recommendations
-    Algorithms suggest optimized workout and meal plans.
-    Get insights tailored to your goals, whether it's weight loss, muscle gain, or maintenance.
+```bash
+npm install chart.js airtable
+```
 
-    🌐 Built with Vue.js
-    Intuitive and seamless interface powered by Vue.js.
-    Learn, build, and expand coding expertise with Vue components.
+## Usage
+
+Run the following command to run the project on localhost
+
+```bash
+npm run dev
+```
+
+## Technologies
+
+_Name the technologies used in the project._ 
+* [Vuejs](https://cli.vuejs.org/) - UI Library.
+* [Chart.js](https://www.chartjs.org/) - Chart Libary.
+* [Airtable](https://airtable.com/) - Backend.
+
+## Acknowledgments
+
+Benjamin Maier
