@@ -20,16 +20,26 @@ import Chart from 'chart.js/auto'
 const chartRef = ref(null)
 const timeframe = ref('monthly')
 
-// Sample monthly data
-
 let chartInstance = null
+
+// Define these as refs so they are accessible throughout the component
+const monthlyData = ref([])
+const weeklyData = ref([])
 
 // Function to get the dynamic min and max values for the y-axis based on data
 const getYAxisRange = (data) => {
-  const min = Math.min(...data) - 100;  // 100 is added for padding
-  const max = Math.max(...data) + 100;  // 100 is added for padding
-  return { min, max }
-}
+  const min = Math.min(...data);
+  const max = Math.max(...data);
+  
+  // Add a dynamic padding based on the range
+  const range = max - min;
+  const padding = range * 0.1; // Add 10% padding
+  
+  return {
+    min: min - padding,
+    max: max + padding
+  };
+};
 
 // Chart options and data configuration
 const createChart = (data, labels) => {
@@ -38,7 +48,7 @@ const createChart = (data, labels) => {
   const ctx = chartRef.value.getContext('2d')
 
   const chartData = {
-    labels: labels, // Use dynamic labels for weeks or months
+    labels: labels,
     datasets: [{
       label: 'Steps',
       data: data,
@@ -89,11 +99,11 @@ const createChart = (data, labels) => {
           }
         },
         y: {
-          display: true, // Hide y-axis lines and labels
+          display: true,
           min: min,
           max: max,
           grid: {
-            display: true, // Hide grid lines
+            display: true
           }
         }
       }
@@ -108,26 +118,28 @@ const createChart = (data, labels) => {
 }
 
 onMounted(async () => {
-  const { weeklyData, monthlyData } = await fetchStepsGroupedByWeekAndMonth();
-  console.log(weeklyData)
+  const { weeklyData: weekly, monthlyData: monthly } = await fetchStepsGroupedByWeekAndMonth()
+  weeklyData.value = weekly.map(d => d.totalSteps) // Store data in refs
+  monthlyData.value = monthly.map(d => d.totalSteps)
+
   // Set initial chart based on the timeframe
   if (timeframe.value === 'monthly') {
-    createChart(monthlyData.map(d => d.totalSteps), ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+    createChart(monthlyData.value, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
   } else {
-    createChart(weeklyData.map(d => d.totalSteps), ['Week 1', 'Week 2', 'Week 3', 'Week 4'])
+    createChart(weeklyData.value, ['Week 1', 'Week 2', 'Week 3', 'Week 4'])
   }
-});
+})
 
 // Watch for changes in timeframe and update the chart data
 watch(timeframe, (newTimeframe) => {
-  
   if (newTimeframe === 'monthly') {
-    createChart(monthlyData, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
+    createChart(monthlyData.value, ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
   } else {
-    createChart(weeklyData, ['Week 1', 'Week 2', 'Week 3', 'Week 4']) // Use dynamic week labels here
+    createChart(weeklyData.value, ['Week 1', 'Week 2', 'Week 3', 'Week 4'])
   }
 })
 </script>
+
 
 <style scoped>
 @import '../assets/global.css';

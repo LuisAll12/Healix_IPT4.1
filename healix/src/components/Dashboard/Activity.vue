@@ -2,7 +2,7 @@
     <div class="Activity-container">
         <div class="UpperDashboard" v-if="setProgressFinished == true">
             <div class="Graph">
-                <ActivityChart />
+                <ActivityHeatmap />
             </div>
             <div class="SideFacts">
                 <div class="Goal_Widget">
@@ -28,7 +28,7 @@
                             <p>You took</p>
                         </div>
                         <div class="Value">
-                            <h1>{{ Steps?.totalSteps || 0 }}</h1>
+                            <h1>{{ MonthlySteps?.totalSteps || 0 }}</h1>
                         </div>
                         <div class="Info_Title">
                             <p>steps this month</p>
@@ -52,7 +52,7 @@
                             <div class="progress" :style="{ width: CardioProgress + '%' }"></div>
                         </div>
                         <div class="details">
-                            <span class="distance">{{ Steps?.totalSteps || 0 }} / {{ WeekGoalCardio }} Steps</span>
+                            <span class="distance">{{ WeeklySteps?.totalSteps || 0 }} / {{ WeekGoalCardio }} Steps</span>
                             <span class="time-left">{{ DaysLeft }} days left</span>
                         </div>
                     </div>
@@ -102,17 +102,18 @@
 </template>
 
 <script setup>
-    import ActivityChart from '../ActivityChart.vue';
     import { getLoggedInUserData } from '../../services/GetUserData.js';
-    import  { fetchUserStepsInMonth }  from '../../services/StepsThisMonth.js';
+    import  { fetchUserStepsInMonth, fetchUserStepsInWeek }  from '../../services/StepsThisMonth.js';
     import { fetchWeightliftingEntriesCount } from '../../services/GetWLSessions.js'
     import { fetchBodyWeightEntriesCount } from '../../services/GetBWSessions.js'
     import { ref, onMounted, computed } from 'vue';
+    import ActivityHeatmap from '../ActivityHeatmap.vue';
 
     import HampterLoader from '../HamsterLoader.vue';
     const DaysLeft = ref(null)
     const userData = ref(null);
-    const Steps = ref();
+    const MonthlySteps = ref();
+    const WeeklySteps = ref();
     const WLSessions = ref();
     const BWSessions = ref();
 
@@ -162,17 +163,17 @@
     }
     
     function setProgress(){
-        CardioProgress.value = Steps.value.totalSteps / WeekGoalCardio.value * 100
+        CardioProgress.value = WeeklySteps.value.totalSteps / WeekGoalCardio.value * 100
         WeightliftingProgress.value = WLSessions.value.entryCount / WeekGoalWeightlifting.value * 100
         BodyWeightProgress.value = BWSessions.value.BWSessionsCount / WeekGoalBodyWeight.value * 100
-        console.log(WeightliftingProgress.value)
-        if(Steps.value.totalSteps >= WeekGoalCardio.value){
+
+        if(WeeklySteps.value.totalSteps >= WeekGoalCardio.value){
             GoalCardioAchieved.value = true;
         }
         if(WLSessions.value.entryCounts >=  WeekGoalWeightlifting.value){
             GoalWeightliftingAchieved.value = true;
         }
-        if(Steps.value.totalSteps >= WeekGoalCardio.value){
+        if(MonthlySteps.value.totalSteps >= WeekGoalCardio.value){
             GoalCardioAchieved.value = true;
         }
         return true;
@@ -183,8 +184,9 @@
         getGoalsOutOfSportClass();
 
         // Fetch monthly steps and weightlifting sessions
-        Steps.value = await fetchUserStepsInMonth();
-        console.log('Fetched Steps:', Steps.value); // Debugging log
+        MonthlySteps.value = await fetchUserStepsInMonth();
+        WeeklySteps.value = await fetchUserStepsInWeek();
+        console.log('Fetched Steps:', MonthlySteps.value, ' ', WeeklySteps.value); // Debugging log
 
         WLSessions.value = await fetchWeightliftingEntriesCount();
         BWSessions.value = await fetchBodyWeightEntriesCount();
@@ -194,7 +196,7 @@
         console.log(setProgressFinished.value);
         if (userData.value && setProgressFinished.value == true) {
             console.log("Logged-in user data:", userData.value);
-        } else {
+        } else {fetchUserStepsInWeek
             console.warn("No user data found or user is not logged in.");
         }
     });

@@ -162,7 +162,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="container">
+    <div class="containermain">
         <div class="UpperPart" v-if="userData">
             <div class="Greet">
                 <h1>Welcome {{ userData.FirstName }} {{ userData.LastName }}</h1>
@@ -305,9 +305,9 @@ onMounted(async () => {
                 </div>
             </div>
         </div>
-        <div class="LowerPart" v-if="userData">
-            <!-- Add additional user-specific details here -->
-        </div>
+        <!-- <div class="LowerPart" v-if="userData">
+            
+        </div> -->
         <div v-else class="loading">
             <HampterLoader />
         </div>

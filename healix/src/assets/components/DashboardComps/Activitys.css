@@ -28,12 +28,15 @@ p, h1, h3{
 }
 .SideFacts {
     display: flex;
-    flex-direction: column; /* Ensures stacking vertically */
-    gap: auto; /* Optional: Can be removed if not required */
-    height: 100%; /* Makes it span the full height */
-    position: relative; /* Necessary if you want to make widgets sticky or positioned */
+    flex-direction: column; 
+    gap: auto; 
+    height: 100%; 
+    position: relative; 
 }
-
+.Graph{
+  height: 100%;
+  width: 60%;
+}
 .Goal_Widget{
     display: flex;
     justify-content: center;
@@ -51,7 +54,7 @@ p, h1, h3{
     background-image: linear-gradient(to top, var(--accent), var(--secondary));
     border-radius: 24px 24px 16px 16px;
     box-shadow: 10px 20px 20px rgba(120, 87, 255, 0.3);
-    margin-top: auto; /* Pushes the widget to the bottom */
+    margin-top: auto; 
 }
 .TotalSteps_Widget_Upper {
     display: flex;
@@ -67,12 +70,12 @@ p, h1, h3{
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.3);
 }
 .Goal_Icon, .TotalSteps_Icon {
-    background: rgba(255, 255, 255, 0.15);  /* semi-transparent white */
+    background: rgba(255, 255, 255, 0.15);  
     border-radius: 16px;
     box-shadow: 
-        0 4px 15px rgba(255, 255, 255, 0.1),  /* outer glow */
-        inset 0 0 8px rgba(255, 255, 255, 0.2);  /* inner glow */
-    backdrop-filter: blur(5px);  /* glass effect */
+        0 4px 15px rgba(255, 255, 255, 0.1), 
+        inset 0 0 8px rgba(255, 255, 255, 0.2);  
+    backdrop-filter: blur(5px);  
 }
 
 .TotalSteps_Widget_Lower{
@@ -176,4 +179,17 @@ p, h1, h3{
   }
 .Plank-Icon{
   height: 96px;
+}
+
+@media only screen and (max-width: 1500px) {
+  .Activity-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .SideFacts {
+    display: block;
+    gap: 20px; 
+    position: unset; 
+  }
 }

@@ -79,7 +79,7 @@ async function SendToAirtable() {
 </script>
 
 <template>
-    <div class="container">
+    <div class="containernm">
         <div class="Left">
             <div class="NFA-Upper">
                 <div class="Infomation">

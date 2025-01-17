@@ -4,8 +4,9 @@
 h1, h4{
     margin: 0;
 }
-.container{
+.containermain{
     margin: 20px;
+    display: block;
 }
 .UpperPart{
     margin-top: 20px;

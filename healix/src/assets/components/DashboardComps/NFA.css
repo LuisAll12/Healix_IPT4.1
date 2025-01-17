@@ -1,6 +1,6 @@
 @import '../../global.css';
 
-.container{
+.containernm{
     color: var(--text);
     display: flex;
     height: 100vh;
@@ -9,6 +9,7 @@
 .NFA-Upper{
     background-color: var(--second-bg);
     height: 50%;
+    position: relative;
     width: 100%;
     border-radius: 0 0 0 120px;
     display: flex;

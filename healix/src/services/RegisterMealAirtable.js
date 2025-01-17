@@ -8,7 +8,7 @@ const base = new Airtable({ apiKey }).base(baseId);
 export async function registerMeal(formData, sessionKey) {
     try {
         const userRecordId = await getUserIdFromSessionKey(sessionKey);
-
+        console.log(userRecordId)
         if (!userRecordId) {
             throw new Error('User not found for the provided session key.');
         }

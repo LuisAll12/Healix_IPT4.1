@@ -1,8 +1,8 @@
 <script setup>
-
+    import ActivityChart from '../ActivityChart.vue';
 </script>
 <template>
-    <h1>Fitness</h1>
+    <ActivityChart />
 </template>
 <style scoped>
     @import '../../assets/components/DashboardComps/Fitness.css';

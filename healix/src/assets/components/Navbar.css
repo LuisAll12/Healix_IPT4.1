@@ -85,3 +85,15 @@
     border-radius: 50px;
     transition: background 0.3s, color 0.3s;
 }
+
+@media only screen and (max-width: 1060px) {
+    .menu-toggle {
+        display: block;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        margin-left: auto;
+    }
+}

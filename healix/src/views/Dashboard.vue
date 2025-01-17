@@ -68,36 +68,43 @@ onMounted(async () => {
 const NavbarSelectedValue = ref(1);
 //Navbartoggle
 function NavbarToggle(ClickValue){
-    console.log(ClickValue);
     NavbarSelectedValue.value = ClickValue;
 }
-
+const NavbarShowState = ref(false)
+function NavbarIn(){
+    NavbarShowState.value = !NavbarShowState.value;
+    console.log(NavbarShowState.value)
+}
 </script>
 
 <template>
-    <div class="container">
-        <div class="Navigation">
-            <div class="Logo">
-                <img src="../assets/images/pictures/Logo.png" alt="">
-                <h2>HEALIX</h2>
+    <div class="container" :class="{Navbarinactive: !NavbarShowState }">
+        <div class="NavBarContainer">
+            <div class="Navigation" v-if="NavbarShowState" >
+                <div class="Logo">
+                    <img src="../assets/images/pictures/Logo.png" alt="">
+                    <h2>HEALIX</h2>
+                </div>
+                <br>
+                <div class="General">
+                    <p class="title">General</p>
+                    <ul>
+                        <li @click="NavbarToggle(1)" class="li-item" :class="{SelectedNavItem: NavbarSelectedValue == 1}"><img src="../assets/images/icons/Main-Icon.png" alt=""><p class="NavbarItem">Main</p></li>
+                        <li @click="NavbarToggle(2)" class="li-item" :class="{SelectedNavItem: NavbarSelectedValue == 2}"><img src="../assets/images/icons/Diet-Icon.png" alt=""><p class="NavbarItem">Meals</p></li>
+                        <li @click="NavbarToggle(3)" class="li-item" :class="{SelectedNavItem: NavbarSelectedValue == 3}"><img src="../assets/images/icons/Fitness-Icon.png" alt=""><p class="NavbarItem">Fitness</p></li>
+                        <li @click="NavbarToggle(4)" class="li-item" :class="{SelectedNavItem: NavbarSelectedValue == 4}"><img src="../assets/images/icons/Activitys-Icon.png" alt=""><p class="NavbarItem">Activitys</p></li>
+                    </ul>
+                </div>
+                <div class="Tools">
+                    <p class="title">Tools</p>
+                    <ul>
+                        <li @click="NavbarToggle(5)" class="li-item-lower" :class="{SelectedNavItem: NavbarSelectedValue == 5}"><p class="NavbarItem">New Meal</p></li>
+                        <li @click="NavbarToggle(6)" class="li-item-lower" :class="{SelectedNavItem: NavbarSelectedValue == 6}"><p class="NavbarItem">New Fitness activity</p></li>
+                    </ul>
+                </div>
             </div>
-            <br>
-            <div class="General">
-                <p class="title">General</p>
-                <ul>
-                    <li @click="NavbarToggle(1)" class="li-item" :class="{SelectedNavItem: NavbarSelectedValue == 1}"><img src="../assets/images/icons/Main-Icon.png" alt=""><p class="NavbarItem">Main</p></li>
-                    <li @click="NavbarToggle(2)" class="li-item" :class="{SelectedNavItem: NavbarSelectedValue == 2}"><img src="../assets/images/icons/Diet-Icon.png" alt=""><p class="NavbarItem">Meals</p></li>
-                    <li @click="NavbarToggle(3)" class="li-item" :class="{SelectedNavItem: NavbarSelectedValue == 3}"><img src="../assets/images/icons/Fitness-Icon.png" alt=""><p class="NavbarItem">Fitness</p></li>
-                    <li @click="NavbarToggle(4)" class="li-item" :class="{SelectedNavItem: NavbarSelectedValue == 4}"><img src="../assets/images/icons/Activitys-Icon.png" alt=""><p class="NavbarItem">Activitys</p></li>
-                </ul>
-            </div>
-            <div class="Tools">
-                <p class="title">Tools</p>
-                <ul>
-                    <li @click="NavbarToggle(5)" class="li-item-lower" :class="{SelectedNavItem: NavbarSelectedValue == 5}"><p class="NavbarItem">New Meal</p></li>
-                    <li @click="NavbarToggle(6)" class="li-item-lower" :class="{SelectedNavItem: NavbarSelectedValue == 6}"><p class="NavbarItem">New Fitness activity</p></li>
-                </ul>
-            </div>
+            <h1 class="toggle-button" @click="NavbarIn()" v-if="!NavbarShowState">></h1>
+            <h1 class="toggle-button" @click="NavbarIn()" v-if="NavbarShowState"><</h1>
         </div>
         <div class="DashboardContent">
             <div class="MainDashboard" v-if="NavbarSelectedValue == 1">

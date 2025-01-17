@@ -5,12 +5,22 @@ html, body{
 }
 .container{
     color: var(--text);
-    display: flex;
+    display: grid;
+    grid-template-columns: 0.4fr 1.6fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 33px;
+    grid-row-gap: 0px;
     min-height: 100%;
 }
+.NavBarContainer{
+    display: flex;
+    grid-area: 1 / 1 / 2 / 2;
+}
 .Navigation{
-    width: 15%;
     background-color: var(--primary);
+}
+.toggle-button:hover{
+    cursor: pointer;
 }
 .Logo{
     display: flex;
@@ -73,5 +83,15 @@ p{
     text-align: center;
 }
 .DashboardContent{
-    width: 100%;
+    grid-area: 1 / 2 / 2 / 3;
+    display: block;
+}
+.Navbarinactive{
+    color: var(--text);
+    display: grid;
+    grid-template-columns: 0.05fr 1.95fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 33px;
+    grid-row-gap: 0px;
+    min-height: 100%;
 }
