@@ -10,15 +10,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     height: 100%;
 }
 .UpperDashboard{
     display: flex;
     justify-content: space-between;
     width: 100%;
-    flex-direction: row;
-    flex-wrap: nowrap;
     gap: 20px;
 }
 .Chart{
@@ -26,6 +23,7 @@
 }
 .SideCards {
     height: 100%;
+    min-width: 462px;
     flex: 1;
 }
 
@@ -68,4 +66,76 @@
 li strong{
     text-decoration: underline;
     font-size: large;
+}
+
+.LowerDashboard{
+    margin-top: 20px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.cards{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+
+/* From Uiverse.io by EmmaxPlay */ 
+.card {
+    min-width: 190px;
+    width: 20%;
+    height: 254px;
+    margin: 0 auto;
+    background-image: linear-gradient(to bottom, var(--primary), var(--bg));
+    border-radius: 8px;
+    z-index: 1;
+    box-shadow: 10px 20px 20px rgba(120, 87, 255, 0.3);
+   }
+   
+   .tools {
+    display: flex;
+    align-items: center;
+    padding: 9px;
+   }
+   
+   .circle {
+    padding: 0 4px;
+   }
+   
+   .box {
+    display: inline-block;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+    padding: 1px;
+    border-radius: 50%;
+   }
+   
+   .red {
+    background-color: #ff605c;
+   }
+   
+   .yellow {
+    background-color: #ffbd44;
+   }
+   
+   .green {
+    background-color: #00ca4e;
+   }
+
+   .card__content{
+    padding: 20px;
+   }
+
+.card__content h2, h1, h4{
+    margin: 0;
+}
+.card__content h2{
+    color: #dadadac2;
+}
+h2 span{
+    font-size: 1rem;
 }

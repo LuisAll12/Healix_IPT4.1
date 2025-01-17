@@ -108,11 +108,11 @@ async function SendToAirtable() {
                     <label for="Category">Musclegroup</label>
                     <select name="category" id="musclegroup" class="InputField" v-model="MuscleGroup">
                         <option value="" disabled selected>Select a Muscle</option>
-                        <option value="weightlifting">Arm</option>
-                        <option value="cardio">Legs</option>
-                        <option value="bodyweight">Chest</option>
-                        <option value="balance">Back</option>
-                        <option value="balance">Abs</option>
+                        <option value="Arm">Arm</option>
+                        <option value="Legs">Legs</option>
+                        <option value="Chest">Chest</option>
+                        <option value="Back">Back</option>
+                        <option value="Abs">Abs</option>
                     </select>
                 </div>
                 <div class="FormField" v-if="Category == 'cardio'">
