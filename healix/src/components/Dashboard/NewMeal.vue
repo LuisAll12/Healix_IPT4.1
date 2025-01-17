@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { registerMeal } from '../../services/RegisterMealAirtable.js';
+import { useRouter } from 'vue-router';
 import Quotes from '../Quotes.vue';
 
 // Variables
@@ -11,6 +12,10 @@ const Fat = ref('');
 const Sugar = ref('');
 const ServingSize = ref('');
 const Loader = ref(false); // Loader state
+
+
+const router = useRouter();
+
 
 function Reset() {
     MealName.value = '';
@@ -87,7 +92,7 @@ async function SendToAirtable() {
                     <p>Fill in the fields to get the most accurate results</p>
                     <div class="Details">
                         <p>More Information</p>
-                        <button class="Details-Button">Details</button>
+                        <button @click="router.push('/dashboard/new-meal/details')" class="Details-Button">Details</button>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { registerInAirtable } from '../../services/airtable.js';
+import { useRouter } from 'vue-router';
 import Quotes from '../Quotes.vue';
 // Variables
 const Category = ref('');
@@ -10,6 +11,8 @@ const MuscleGroup = ref('');
 const Steps = ref('');
 const Loader = ref(false);  // Loader state
 
+
+const router = useRouter();
 function Reset() {
     Category.value = '';
     Intensity.value = '';
@@ -60,6 +63,7 @@ async function SendToAirtable() {
     // Hide the loader after data is written
     Loader.value = false;
 }
+
 </script>
 
 <template>
@@ -72,7 +76,7 @@ async function SendToAirtable() {
                     <br>
                     <div class="Details">
                         <p>More Information</p>
-                        <button class="Details-Button">Details</button>
+                        <button @click="router.push('/dashboard/new-fitness/details')" class="Details-Button">Details</button>
                     </div>
                 </div>
             </div>

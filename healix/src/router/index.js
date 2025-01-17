@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from 'vue-router';
 const HomeView = () => import(/* webpackChunkName: "CreateLink" */ '../views/Home.vue');
 const Dashboard = () => import(/* webpackChunkName: "CreateLink" */ '../views/Dashboard.vue');
 const Login = () => import(/* webpackChunkName: "CreateLink" */ '../views/Login.vue');
-const NewActivity = () => import(/* webpackChunkName: "CreateLink" */ '../views/NewActivity.vue');
 const Profile = () => import(/* webpackChunkName: "CreateLink" */ '../views/Profile.vue');
 import Main from '../components/Dashboard/Main.vue';
 import Meals from '../components/Dashboard/Meals.vue';
@@ -11,6 +10,8 @@ import Fitness from '../components/Dashboard/Fitness.vue';
 import Activity from '../components/Dashboard/Activity.vue';
 import NewMeal from '../components/Dashboard/NewMeal.vue';
 import NFA from '../components/Dashboard/NFA.vue';
+import Details_NFA from '../components/Dashboard/Details_NFA.vue';
+import Details_NM from '../components/Dashboard/Details_NM.vue';
 
 const routes = [
     {
@@ -40,7 +41,7 @@ const routes = [
         },
         {
             path: 'new-meal',
-            component: NewMeal
+            component: NewMeal,
         },
         {
             path: 'new-fitness',
@@ -57,6 +58,16 @@ const routes = [
         path: '/profile',
         name: 'Profile',
         component: Profile
+    },
+    {
+        path: '/dashboard/new-fitness/details',
+        name: 'DetailsNFA',
+        component: Details_NFA
+    },
+    {
+        path: '/dashboard/new-meal/details',
+        name: 'DetailsNM',
+        component: Details_NM
     },
 ];
 
