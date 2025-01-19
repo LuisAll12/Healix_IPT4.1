@@ -7,6 +7,8 @@ import { fetchCaloriesBurntToday } from '../../services/GetCaloriesBurnt.js';
 import { fetchCaloriesConsumedToday, fetchProteinConsumedToday, fetchTodaysMealCount } from '../../services/GetCaloriesTd.js';
 import { useRouter } from 'vue-router';
 
+import HampterLoader from '../../components/HamsterLoader.vue'
+
 const router = useRouter();
 const Last4Meals = ref([]);
 const RndMeals = ref([]);
@@ -36,7 +38,7 @@ const intakeBarBarHeight = computed(() => {
   if (total === 0) return 0; // Prevent division by zero
   return (TodaysCal.value / total) * 100;
 });
-
+const isloading = ref(true);
 onMounted(async () => {
     const userData = await getLoggedInUserData();
     Bodyweight.value = userData.Weight;
@@ -47,12 +49,16 @@ onMounted(async () => {
     TodaysCal.value = await fetchCaloriesConsumedToday();
     TodaysProtein.value = await fetchProteinConsumedToday();
     TodaysInputs.value = await fetchTodaysMealCount();
+    isloading.value = false;
 });
 </script>
 
 <template>
     <div class="Meals-Container">
-        <div class="UpperMealsDashboard">
+        <div class="loading" v-if="isloading">
+            <HampterLoader />
+        </div>
+        <div class="UpperMealsDashboard" v-if="!isloading">
             <div class="UpperCard">
                 <h2 class="title">Todays Calories</h2>
                 <h3 class="value">{{ TodaysCal }}</h3>
@@ -81,7 +87,7 @@ onMounted(async () => {
                 </div>
             </div>
         </div>
-        <div class="LowerMealsDashboard">
+        <div class="LowerMealsDashboard" v-if="!isloading">
             <div class="LastMeals LowerCard">
                 <h1>Last 4 Meals</h1>
                 <div class="Value">
@@ -124,4 +130,10 @@ onMounted(async () => {
 </template>
 <style scoped>
     @import '../../assets/components/DashboardComps/Meals.css';
+    .loading {
+    position: absolute; 
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); 
+}
 </style>
