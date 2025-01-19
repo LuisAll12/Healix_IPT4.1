@@ -62,4 +62,6 @@ Benjamin Maier
 ## 9. Access Broader Fitness Insights
 - For a more comprehensive overview of your fitness activities, head to the **Activities** section.
 
+## Documentation can be found under healix/Dokumentation
+
 
