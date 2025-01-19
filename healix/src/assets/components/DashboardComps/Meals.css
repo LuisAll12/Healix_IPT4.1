@@ -61,20 +61,7 @@ h1, h2, h4, p{
     align-items: flex-end; /* Align text to the bottom */
     color: #fff; /* Text color */
 }
-/* .consumptionBar, .intakeBar{
-    width: auto;
-    padding: 7px;
-    background-color: var(--primary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.BalanceBar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-} */
+
 .bars{
     display: flex;
     justify-content: space-around;
