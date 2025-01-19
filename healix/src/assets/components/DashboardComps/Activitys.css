@@ -112,16 +112,14 @@ p, h1, h3{
   }
   
 .icon {
-    background: rgba(255, 255, 255, 0.15);  /* semi-transparent white */
+    background: rgba(255, 255, 255, 0.15);  
     border-radius: 16px;
     box-shadow: 
-        0 4px 15px rgba(255, 255, 255, 0.1),  /* outer glow */
-        inset 0 0 8px rgba(255, 255, 255, 0.2);  /* inner glow */
-    backdrop-filter: blur(5px);  /* glass effect */
+        0 4px 15px rgba(255, 255, 255, 0.1),  
+        inset 0 0 8px rgba(255, 255, 255, 0.2);  
+    backdrop-filter: blur(5px);  
   
 }
-
-  /* Text Content */
   .content {
     text-align: center;
     width: 100%;
@@ -139,7 +137,6 @@ p, h1, h3{
     margin-bottom: 16px;
   }
   
-  /* Progress Bar */
   .progress-bar {
     width: 100%;
     height: 8px;
@@ -157,7 +154,6 @@ p, h1, h3{
     transition: width 0.3s ease;
   }
   
-  /* Distance and Time Left */
   .details {
     display: flex;
     justify-content: space-between;
@@ -181,7 +177,7 @@ p, h1, h3{
   height: 96px;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1500px) {
   .Activity-container {
     display: flex;
     flex-direction: column;

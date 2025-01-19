@@ -54,6 +54,22 @@
     border-radius: 5px; 
 }
 
-@media only screen and (max-width: 1200px) {
-
+.cellloading{
+    width: 100%; 
+    height: 4vh; 
+    border-radius: 5px; 
+    background-image: linear-gradient(
+		90deg,
+		#3b3b3b 0px,
+		rgba(99, 99, 99, 0.9) 40px,
+		#3b3b3b 80px
+	);
+    animation: shimmer 1.5s infinite;
+    background-size: 300%;
+    background-position: 100% 0;
 }
+@keyframes shimmer {
+    to {
+      background-position: -100% 0;
+    }
+  }

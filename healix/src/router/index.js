@@ -12,6 +12,7 @@ import NewMeal from '../components/Dashboard/NewMeal.vue';
 import NFA from '../components/Dashboard/NFA.vue';
 import Details_NFA from '../components/Dashboard/Details_NFA.vue';
 import Details_NM from '../components/Dashboard/Details_NM.vue';
+import Edit_Meals from '../components/Dashboard/EditMeals.vue'
 
 const routes = [
     {
@@ -68,6 +69,11 @@ const routes = [
         path: '/dashboard/new-meal/details',
         name: 'DetailsNM',
         component: Details_NM
+    },
+    {
+        path: '/dashboard/meals/edit',
+        name: 'EditMeals',
+        component: Edit_Meals
     },
 ];
 

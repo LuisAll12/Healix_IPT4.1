@@ -99,7 +99,7 @@ p{
     grid-template-rows: 1fr;
     grid-column-gap: 10px;
     grid-row-gap: 0px;
-    min-height: 100%;
+    min-height: 100VH;
     transition: 500ms ease ;
 }
 

@@ -118,8 +118,8 @@
     const BWSessions = ref();
 
     const CardioProgress = ref(0);
-    const WeightliftingProgress = ref(20);
-    const BodyWeightProgress = ref(23);
+    const WeightliftingProgress = ref(0);
+    const BodyWeightProgress = ref(0);
 
     const WeekGoalCardio = ref(null);
     const WeekGoalWeightlifting = ref(null);
