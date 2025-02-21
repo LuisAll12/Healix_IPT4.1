@@ -1,4 +1,4 @@
-# Project Title
+# Healix
 
 Purpose
 Healix is designed to simplify managing your health and maintaining your fitness level. With a dual focus on exercise  and nutrition, our app ensures you get personalized insights to embark on your fitness journey.
